@@ -1,0 +1,108 @@
+#+TITLE: Edwina
+
+Edwina is a dynamic window manager for Emacs. It automatically arranges your
+Emacs panes (called "windows" in Emacs parlance) into predefined layouts,
+[[https://dwm.suckless.org/][dwm]]-style.
+
+* Status
+
+Edwina is new and experimental. While it works very well on the subset
+of Emacs that I use, you will definitely encounter bugs if you venture
+outside of that. Patches welcome!
+
+* Installation
+
+** MELPA
+
+After [[https://melpa.org/#/getting-started][enabling installation]] of MELPA
+packages, install =edwina= with =M-x package-install=.
+
+** Manual
+
+Copy or clone Edwina somewhere on your system:
+
+#+BEGIN_SRC sh
+  git clone https://github.com/ajgrf/edwina ~/.emacs.d/edwina
+#+END_SRC
+
+Then add its location to =load-path=:
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "~/.emacs.d/edwina"))
+#+END_SRC
+
+** use-package
+
+Here's a complete example configuration with =use-package= for reference:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package edwina
+    :ensure t
+    :config
+    (setq display-buffer-base-action '(display-buffer-below-selected))
+    (edwina-setup-dwm-keys)
+    (edwina-mode 1))
+#+END_SRC
+
+* Usage
+
+Edwina divides the frame into 2 areas, the master area and the stack.
+The master area contains the largest window(s), and other windows are
+placed in the stack. Edwina tries to place the master area to the
+side, but if the frame is too narrow for 2 columns it will put it on
+top instead.
+
+#+BEGIN_EXAMPLE
++-----------+---------+     +-----------+
+|           |    1    |     |           |
+|           +---------+     |  master   |
+|  master   |    2    |     |           |
+|           +---------+     +-----------+
+|           |    3    |     |     1     |
++-----------+---------+     +-----------+
+#+END_EXAMPLE
+
+Edwina arranges windows according to just a few parameters: the size
+of the master area, the number of windows in master, the order of
+windows, and the current layout. By operating on these parameters
+instead of manually manipulating individual windows, you can greatly
+reduce the effort required to resize and reposition windows.
+
+* Key Bindings
+
+By default these keys are prefixed with =C-c C-w=. Customize
+=edwina-keymap-prefix= to change the prefix.
+
+|-------------------+--------------------------------------|
+| Binding           | Action                               |
+|-------------------+--------------------------------------|
+| =r=, =C-r=        | Arrange windows                      |
+| =n=, =C-n=, =SPC= | Move to next window                  |
+| =p=, =C-p=        | Move to previous window              |
+| =N=, =C-S-n=      | Swap places with the next window     |
+| =P=, =C-S-p=      | Swap places with the previous window |
+| =%=, ={=, =[=     | Decrease the size of the master area |
+| =^=, =}=, =]=     | Increase the size of the master area |
+| =d=, =C-d=        | Decrease number of windows in master |
+| =i=               | Increase number of windows in master |
+| =k=, =C-k=        | Delete window                        |
+| =RET=             | Cycle window to/from master area     |
+| =c=, =C-c=        | Clone current window                 |
+|-------------------+--------------------------------------|
+
+See also =(edwina-setup-dwm-keys)= to set up alternative dwm-like key
+bindings.
+
+* Scope
+
+Edwina does not provide workspaces or window rules, instead delegating
+such functionality to other plugins and Emacs facilities (like
+[[https://github.com/wasamasa/eyebrowse][eyebrowse]]).
+
+I recommend setting ~display-buffer~ to open a new window by default,
+then defining any exceptions in ~display-buffer-alist~.
+
+#+BEGIN_SRC emacs-lisp
+  (setq display-buffer-base-action '(display-buffer-below-selected))
+#+END_SRC

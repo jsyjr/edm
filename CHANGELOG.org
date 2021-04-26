@@ -1,0 +1,44 @@
+#+TITLE: Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [[https://keepachangelog.com/en/1.0.0/][Keep a Changelog]],
+but in Org markup because Emacs.
+
+* Unreleased
+** Changed
+- Show layout name in mode line instead of nondescript "edwina".
+
+** Added
+- New option =edwina-mode-line-format=.
+
+** Removed
+- Removed bindings =C-c C-w 5= and =C-c C-w 6=.
+
+** Fixed
+- Fixed bug where master windows would get thrown away when the stack windows
+  got too small.
+
+* 0.2.0 - 2019-08-18
+** Changed
+- Renamed project to Edwina because it conflicted with another Emacs-related
+  [[https://www.gnu.org/software/mit-scheme/documentation/mit-scheme-user/Edwin.html][text editor]]
+  associated with the GNU project.
+- Changed key bindings to not conflict with Emacs defaults.
+
+** Deprecated
+- Loading =edwin-mode= still works but will complain loudly. Compatibility will
+  be removed in the next release.
+
+** Added
+- New command =edwina-clone-window=.
+- New function =edwina-setup-dwm-keys= to get the old dwm-like bindings back.
+- Added Emacs Customization group.
+
+* 0.1.1 - 2019-08-17
+** Fixed
+- Make =package-lint= and =checkdoc= happy with the code.
+
+* 0.1.0 - 2019-08-17
+** Added
+- Initial release of Edwin.
