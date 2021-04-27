@@ -39,7 +39,7 @@
   :group 'convenience
   :prefix "edm-")
 
-(defcustom edm-keymap-prefix (kbd "C-c C-w")
+(defcustom edm-keymap-prefix (kbd "C-,")  ; "C-c C-w"
   "Prefix key for keybindings."
   :type 'string
   :group 'edm)
