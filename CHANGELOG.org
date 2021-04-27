@@ -1,4 +1,4 @@
-#+TITLE: Changelog
+- #+TITLE: Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -6,6 +6,9 @@ The format is based on [[https://keepachangelog.com/en/1.0.0/][Keep a Changelog]
 but in Org markup because Emacs.
 
 * Unreleased
+** Changed
+- Cloned and renamed to edm (an emacs display manager)
+
 ** Changed
 - Show layout name in mode line instead of nondescript "edwina".
 
